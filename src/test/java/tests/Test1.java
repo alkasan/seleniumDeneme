@@ -351,7 +351,7 @@ public class Test1 {
         driver.close();
 
     */
-
+/*
         //ALERT
         System.setProperty("webdriver.chrome.driver","drivers/chromedriver.exe");
         WebDriver driver = new ChromeDriver();
@@ -365,6 +365,24 @@ public class Test1 {
         wait.until(ExpectedConditions.alertIsPresent());
 
         driver.switchTo().alert().accept();
+*/
+
+        // FRAME
+        System.setProperty("webdriver.chrome.driver","drivers/chromedriver.exe");
+        WebDriver driver = new ChromeDriver();
+
+        driver.get("https://demoqa.com/frames");
+        driver.manage().window().maximize();
+
+        //frame getirmek için
+        driver.switchTo().frame("frame1");
+
+        WebElement heading = driver.findElement(By.id("sampleHeading"));
+        String text = heading.getText();
+        System.out.println(text);
+
+
+
 
     }
 }
