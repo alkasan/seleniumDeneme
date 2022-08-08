@@ -1,15 +1,22 @@
 package tests;
 
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.HttpClientBuilder;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
-
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class Test1 {
-    public static void main(String[] args ) {
+    public static void main(String[] args) throws InterruptedException {
     /*
     // bu kısım her bir değerin girilmesi ve en altta bu değerlerin okunması kısmı
         System.setProperty("webdriver.chrome.driver","drivers/chromedriver.exe");
@@ -180,11 +187,12 @@ public class Test1 {
         wait.until(ExpectedConditions.elementToBeClickable(firstButton));
         firstButton.click();
 */
-        System.setProperty("webdriver.chrome.driver","drivers/chromedriver.exe");
-        WebDriver driver = new ChromeDriver();
 
-        driver.get("https://demoqa.com/dynamic-properties");
-        driver.manage().window().maximize();
+        //    System.setProperty("webdriver.chrome.driver","drivers/chromedriver.exe");
+        //    WebDriver driver = new ChromeDriver();
+
+        //    driver.get("https://demoqa.com/dynamic-properties");
+        //    driver.manage().window().maximize();
 /*
         //renk değişmeden önceki classname konsola yazdırdık
         WebElement colorChangeButton = driver.findElement(By.id("colorChange"));
@@ -196,10 +204,167 @@ public class Test1 {
         className = colorChangeButton.getAttribute("class");
         System.out.println("After change: "+className);
 */
+
+/*
         //burada da görünmeyen dinamik element için gerekli kodlar yazıldı.
         WebDriverWait wait = new WebDriverWait(driver,5);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("visibleAfter")));
         driver.findElement(By.id("visibleAfter")).click();
+*/
+        //KIRIK LINKLER -
+
+ /*
+        System.setProperty("webdriver.chrome.driver","drivers/chromedriver.exe");
+        WebDriver driver = new ChromeDriver();
+
+        driver.get("https://demoqa.com/broken");
+        driver.manage().window().maximize();
+
+        HttpClient client = HttpClientBuilder.create().build();
+        HttpGet request = new HttpGet("https://demoqa.com/");
+        HttpResponse response = null;
+        try {
+            response = client.execute(request);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        int statusCode = response.getStatusLine().getStatusCode();
+        System.out.println(statusCode);
+*/
+/*
+        System.setProperty("webdriver.chrome.driver","drivers/chromedriver.exe");
+        WebDriver driver = new ChromeDriver();
+
+        driver.get("https://demoqa.com/broken");
+        driver.manage().window().maximize();
+
+        WebElement brokenImage = driver.findElement(By.xpath("//div/img[2]"));
+        String brokenImageUrl = brokenImage.getAttribute("src");
+        System.out.println(brokenImageUrl);
+
+        HttpClient client = HttpClientBuilder.create().build();
+        HttpGet request = new HttpGet(brokenImageUrl);
+        HttpResponse response = null;
+        try {
+            response = client.execute(request);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        int statusCode = response.getStatusLine().getStatusCode();
+        System.out.println(statusCode);
+*/
+/*
+        // img1 görüntüleme
+        System.setProperty("webdriver.chrome.driver","drivers/chromedriver.exe");
+        WebDriver driver = new ChromeDriver();
+
+        driver.get("https://demoqa.com/broken");
+        driver.manage().window().maximize();
+
+        WebElement validImage = driver.findElement(By.xpath("//div/img[1]"));
+        String validImageUrl = validImage.getAttribute("src");
+        System.out.println(validImage);
+
+        HttpClient client = HttpClientBuilder.create().build();
+        HttpGet request = new HttpGet(validImageUrl);
+        HttpResponse response = null;
+        try {
+            response = client.execute(request);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        int statusCode = response.getStatusLine().getStatusCode();
+        System.out.println(statusCode);
+        if (statusCode ==200) {
+            System.out.println("Valid Image!");
+        } else if (statusCode ==500) {
+            System.out.println("broken image!");
+        }
+
+ */
+ /*
+      // DOWNLOAD İSLEMİ
+        System.setProperty("webdriver.chrome.driver","drivers/chromedriver.exe");
+        WebDriver driver = new ChromeDriver();
+
+        driver.get("https://demoqa.com/upload-download");
+        driver.manage().window().maximize();
+
+        WebElement downloadButton = driver.findElement(By.id("downloadButton"));
+        downloadButton.click();
+
+        String path = "C:\\Users\\ealka\\Downloads";
+        String fileName = "sampleFile.jpeg";
+        Thread.sleep(2000);
+        boolean isDownloaded = isFileDownloaded(path, fileName);
+        System.out.println(isDownloaded);
+
+    }
+
+    public static boolean isFileDownloaded(String downloadpath, String fileName) {
+        File file = new File(downloadpath);
+        File[] files = file.listFiles();
+
+        for(int i=0; i<files.length ; i++) {
+            if ((files[i].getName().equals(fileName))){
+                files[i].delete();
+                return true;
+            }
+        }
+        return false;
+
+  */
+  /*
+        // UPLOAD İSLEMİ
+        System.setProperty("webdriver.chrome.driver","drivers/chromedriver.exe");
+        WebDriver driver = new ChromeDriver();
+
+        driver.get("https://demoqa.com/upload-download");
+        driver.manage().window().maximize();
+
+        WebElement uploadButton = driver.findElement(By.id("uploadFile"));
+        uploadButton.sendKeys("C:\\Users\\ealka\\OneDrive\\Masaüstü\\seleniumIcon.png");
+
+   */
+   /*
+        //WINDOWS TAB İLE ETKİLEŞİM
+        System.setProperty("webdriver.chrome.driver","drivers/chromedriver.exe");
+        WebDriver driver = new ChromeDriver();
+
+        driver.get("https://demoqa.com/browser-windows");
+        driver.manage().window().maximize();
+        // burada ikinci sayfayı açıyoruz
+        //eğer ikinci sayfayı farklı bir sayfada açmak istersek new window tıklamaya bakacağız
+        // id kısmını tabButton u new window idsini kullanacağız windowButton
+        WebElement tabButton = driver.findElement(By.id("tabButton"));
+        tabButton.click();
+        //buradan sonra ise actıgımız sayfalar kac tane bunu sorgulayarak,
+        List<String> tabs = new ArrayList<>(driver.getWindowHandles());
+
+        System.out.println(tabs.size());
+
+        driver.switchTo().window(tabs.get(1));
+        System.out.println(driver.getCurrentUrl());
+
+        Thread.sleep(2000);
+        //close kulllanıyoruz quit kullanmıyoruz ki tüm şeyler kapanmasın.
+        driver.close();
+
+    */
+
+        //ALERT
+        System.setProperty("webdriver.chrome.driver","drivers/chromedriver.exe");
+        WebDriver driver = new ChromeDriver();
+
+        driver.get("https://demoqa.com/alerts");
+        driver.manage().window().maximize();
+
+        driver.findElement(By.id("alertButton")).click();
+
+        WebDriverWait wait = new WebDriverWait(driver, 2);
+        wait.until(ExpectedConditions.alertIsPresent());
+
+        driver.switchTo().alert().accept();
 
     }
 }
