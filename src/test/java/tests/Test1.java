@@ -366,7 +366,7 @@ public class Test1 {
 
         driver.switchTo().alert().accept();
 */
-
+/*
         // FRAME
         System.setProperty("webdriver.chrome.driver","drivers/chromedriver.exe");
         WebDriver driver = new ChromeDriver();
@@ -380,8 +380,123 @@ public class Test1 {
         WebElement heading = driver.findElement(By.id("sampleHeading"));
         String text = heading.getText();
         System.out.println(text);
+*/
+/*        // FRAME
+        System.setProperty("webdriver.chrome.driver","drivers/chromedriver.exe");
+        WebDriver driver = new ChromeDriver();
+
+        driver.get("https://demoqa.com/frames");
+        driver.manage().window().maximize();
+
+        driver.switchTo().frame("frame1");
+
+        WebElement heading = driver.findElement(By.id("sampleHeading"));
+        String text = heading.getText();
+        System.out.println(text);
+
+        driver.switchTo().parentFrame();
+
+        List<WebElement> elementList = driver.findElements(By.cssSelector("div[id='framesWrapper'] div"));
+        String paragraph = elementList.get(0).getText();
+        System.out.println(paragraph);
+
+        driver.switchTo().frame("frame2");
+
+        WebElement heading2 = driver.findElement(By.id("sampleHeading"));
+        String text2 = heading2.getText();
+        System.out.println(text2);
+*/
+/*        //FRAME2
+        System.setProperty("webdriver.chrome.driver","drivers/chromedriver.exe");
+        WebDriver driver = new ChromeDriver();
+
+        driver.get("https://demoqa.com/frames");
+        driver.manage().window().maximize();
+
+        //genelde sleep önerilmez fakat frame anlamak için bu kısımda ekliyoruz
+        Thread.sleep(5000);
+
+        WebElement addFrame = driver.findElement(By.cssSelector("iframe[title='3rd party ad content'"));
+        driver.switchTo().frame(addFrame);
+
+        WebElement closeButton = driver.findElement(By.id("cbb"));
+        closeButton.click();
+*/
+/*        //NESTED FRAME
+        System.setProperty("webdriver.chrome.driver","drivers/chromedriver.exe");
+        WebDriver driver = new ChromeDriver();
+        driver.get("https://demoqa.com/nestedframes");
+        driver.manage().window().maximize();
+
+        driver.switchTo().frame("frame1");
+        WebElement parentBody = driver.findElement(By.tagName("body"));
+        System.out.println(parentBody.getText());
+
+        driver.switchTo().frame(0);
+
+        WebElement p =driver.findElement(By.tagName("p"));
+        System.out.println(p.getText());
+
+ */
+        /*      //MODAL
+        System.setProperty("webdriver.chrome.driver","drivers/chromedriver.exe");
+        WebDriver driver = new ChromeDriver();
+        driver.get("https://demoqa.com/modal-dialogs");
+        driver.manage().window().maximize();
+
+        WebElement smallButton = driver.findElement(By.id("showSmallModal"));
+        smallButton.click();
+
+        WebElement modelText = driver.findElement(By.cssSelector("div.modal-body"));
+        System.out.println(modelText.getText());
+
+        WebElement smallCloseButton = driver.findElement(By.id("closeSmallModal"));
+        smallCloseButton.click();
+
+         */
+/*
+        //ACORDION
+        System.setProperty("webdriver.chrome.driver","drivers/chromedriver.exe");
+        WebDriver driver = new ChromeDriver();
+        driver.get("https://demoqa.com/accordian");
+        driver.manage().window().maximize();
+
+        WebElement firstCard = driver.findElement(By.xpath("//div[@class='card'][1]/div[2]"));
+        String className = firstCard.getAttribute("class");
+        System.out.println(className);
+
+        driver.findElement(By.id("sectionHeading")).click();
+
+        className =firstCard.getAttribute("class");
+        System.out.println(className);
+
+        Thread.sleep(2000);
+        className = firstCard.getAttribute("class");
+        System.out.println(className);
+*/
+
+        //ACCORDION-2
+        //1 metne tıklayıp daha sonra ikinci metne tıkladık, diğerinin kapanmasını inceledik
+        System.setProperty("webdriver.chrome.driver","drivers/chromedriver.exe");
+        WebDriver driver = new ChromeDriver();
+        driver.get("https://demoqa.com/accordian");
+        driver.manage().window().maximize();
+
+        WebElement firstButton = driver.findElement(By.id("section1Heading"));
+        firstButton.click();
+        WebElement firstText = driver.findElement(By.xpath("//*[@id=\"section1Content\"]/p"));
+
+        WebElement secondButton = driver.findElement(By.id("section2Heading"));
+        secondButton.click();
+        WebElement secondText = driver.findElement(By.xpath("//*[@id=\"section2Content\"]/p[1]"));
 
 
+   /*     //AUTO COMPLETE
+        System.setProperty("webdriver.chrome.driver","drivers/chromedriver.exe");
+        WebDriver driver = new ChromeDriver();
+        driver.get("https://demoqa.com/auto-complete");
+        driver.manage().window().maximize();
+       */
 
 
     }
