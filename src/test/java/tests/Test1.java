@@ -4,15 +4,22 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.http.util.Asserts;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import javax.accessibility.AccessibleIcon;
+import javax.swing.*;
 import java.io.File;
 import java.io.IOException;
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 
 
 public class Test1 {
@@ -474,7 +481,7 @@ public class Test1 {
         className = firstCard.getAttribute("class");
         System.out.println(className);
 */
-
+/*
         //ACCORDION-2
         //1 metne tıklayıp daha sonra ikinci metne tıkladık, diğerinin kapanmasını inceledik
         System.setProperty("webdriver.chrome.driver","drivers/chromedriver.exe");
@@ -486,18 +493,129 @@ public class Test1 {
         firstButton.click();
         WebElement firstText = driver.findElement(By.xpath("//*[@id=\"section1Content\"]/p"));
 
+        Thread.sleep(3000);
         WebElement secondButton = driver.findElement(By.id("section2Heading"));
         secondButton.click();
         WebElement secondText = driver.findElement(By.xpath("//*[@id=\"section2Content\"]/p[1]"));
-
-
-   /*     //AUTO COMPLETE
+*/
+/*
+        //AUTO COMPLETE
         System.setProperty("webdriver.chrome.driver","drivers/chromedriver.exe");
         WebDriver driver = new ChromeDriver();
         driver.get("https://demoqa.com/auto-complete");
         driver.manage().window().maximize();
-       */
 
+        WebElement input = driver.findElement(By.id("autoCompleteSingleInput"));
+        input.sendKeys("R");
+
+        List<WebElement> suggestions = driver.findElements(By.cssSelector("div.auto-complete__option"));
+
+        for(WebElement suggestion : suggestions) {
+
+            String text = suggestion.getText();
+
+            System.out.println(text);
+
+            if(text.toLowerCase().contains("r")) {
+                System.out.println(text + "has r letter.");
+                //negatif test
+                //   if(text.tol-LowerCase().contains("w")){
+                //System.out.println(text + "does not have letter 'w'...");
+
+        }
+
+        }
+*/
+/*
+        //DATA PICKER
+        System.setProperty("webdriver.chrome.driver","drivers/chromedriver.exe");
+        WebDriver driver = new ChromeDriver();
+        driver.get("https://demoqa.com/date-picker");
+        driver.manage().window().maximize();
+
+        WebElement dateSelection =driver.findElement(By.id("datePickerMonthYearInput"));
+        dateSelection.click();
+
+        WebElement monthElement = driver.findElement(By.className("react-datepicker__month-select"));
+        // secmek istedigimiz elementi veriyoruz
+        Select select = new Select(monthElement);
+        // select maddelerindeki string ifadeki alıyor
+        select.selectByVisibleText("December");
+
+        WebElement yearElement = driver.findElement(By.className("react-datepicker__year-select"));
+        select = new Select(yearElement);
+        select.selectByVisibleText("1995");
+
+        // benim takvimdeki tüm elementler elime geçmiş oluyor
+        List<WebElement> daysElement = driver.findElements(By.cssSelector("div.react-datepicker__day"));
+
+        // burada bütün değerlerin konsola yazdırılmasını istiyoruz
+        // for(WebElement dayElement : daysElement) {
+        //    System.out.println(dayElement.getText());
+        //}
+        for(WebElement dayElement : daysElement) {
+            String text = dayElement.getText();
+            if(text.equals("19")){
+                dayElement.click();
+                break;
+            }
+        }
+*/
+/*
+       //SLIDER
+        System.setProperty("webdriver.chrome.driver","drivers/chromedriver.exe");
+        WebDriver driver = new ChromeDriver();
+        driver.get("https://demoqa.com/slider");
+
+        WebElement slider = driver.findElement(By.cssSelector("input[type='range']"));
+
+        Actions action = new Actions(driver);
+        action.dragAndDropBy(slider, 10, 0 ).perform();
+
+        WebElement valueUnderSlider = driver.findElement(By.cssSelector(".range-slider__tooltip__label"));
+        String value = valueUnderSlider.getText();
+        System.out.println("Recent value: " + value);
+
+        WebElement sliderValue =driver.findElement(By.id("sliderValue"));
+        String sliderValueText = sliderValue.getAttribute("value");
+        System.out.println("Slider value: " + sliderValueText);
+*/
+/*
+        //PROGRESS BAR
+        System.setProperty("webdriver.chrome.driver","drivers/chromedriver.exe");
+        WebDriver driver = new ChromeDriver();
+        driver.get("https://demoqa.com/progress-bar");
+
+        WebElement startStopButton = driver.findElement(By.id("startStopButton"));
+        startStopButton.click();
+
+        WebElement progressBar = driver.findElement(By.cssSelector("div[role=\"progressbar\"]"));
+
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+        wait.pollingEvery(Duration.ofMillis(100));
+
+        wait.until(ExpectedConditions.attributeToBe(By.cssSelector("button[class='mt-3 btn btn-primary']"),"id", "resetButton"));
+
+    //    wait.until(ExpectedConditions.attributeToBe(progressBar,"aria-valuenow", "50"));
+    //    starsStopButton.click();
+
+
+ */
+        //TOOLTİPS
+        System.setProperty("webdriver.chrome.driver","drivers/chromedriver.exe");
+        WebDriver driver = new ChromeDriver();
+        driver.get("https://demoqa.com/tool-tips");
+
+        WebElement toolTipButton = driver.findElement(By.id("toolTipButton"));
+        Actions action = new Actions(driver);
+        action.moveToElement(toolTipButton).perform();
+
+        WebDriverWait wait =new WebDriverWait(driver,10);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("tooltip-inner")));
+
+        WebElement toolTip =driver.findElement(By.className("tooltip-inner"));
+        System.out.println("Text: " +toolTip.getText());
 
     }
 }
+
