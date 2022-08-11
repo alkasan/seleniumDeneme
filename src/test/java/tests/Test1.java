@@ -289,7 +289,7 @@ public class Test1 {
         }
 
  */
- /*
+/*
       // DOWNLOAD İSLEMİ
         System.setProperty("webdriver.chrome.driver","drivers/chromedriver.exe");
         WebDriver driver = new ChromeDriver();
@@ -320,7 +320,7 @@ public class Test1 {
         }
         return false;
 
-  */
+*/
   /*
         // UPLOAD İSLEMİ
         System.setProperty("webdriver.chrome.driver","drivers/chromedriver.exe");
@@ -601,6 +601,7 @@ public class Test1 {
 
 
  */
+/*
         //TOOLTİPS
         System.setProperty("webdriver.chrome.driver","drivers/chromedriver.exe");
         WebDriver driver = new ChromeDriver();
@@ -615,7 +616,7 @@ public class Test1 {
 
         WebElement toolTip =driver.findElement(By.className("tooltip-inner"));
         System.out.println("Text: " +toolTip.getText());
-
+*/
     }
 }
 
